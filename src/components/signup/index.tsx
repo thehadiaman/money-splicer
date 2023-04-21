@@ -1,9 +1,9 @@
 import SignUpPageContainer from "./container/signup";
 
 
-export default function SignUpPage() {
+export default function SignUpPage(props:any) {
 
     return (
-        <SignUpPageContainer/>
+        <SignUpPageContainer {...props}/>
     );
 }

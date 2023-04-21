@@ -1,8 +1,8 @@
 import LoginPageContainer from "./container/login";
 
-export default function LoginPage() {
+export default function LoginPage(props: any) {
 
     return (
-        <LoginPageContainer/>
+        <LoginPageContainer {...props}/>
     );
 }

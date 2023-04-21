@@ -1,8 +1,5 @@
 import { IButton, IButtonGroup } from "../interfaces";
 
-function openCity(cityName: any): void {
-
-}
 export default function ButtonGroupContainer({buttons, spacing}: IButtonGroup) {
 
     
@@ -16,18 +13,19 @@ export default function ButtonGroupContainer({buttons, spacing}: IButtonGroup) {
                         if(button['color'])
                             buttonStyle.color = button.color;
                         if(button['backgroundColor'])
-                            buttonStyle['background-color'] = button.backgroundColor;
+                            buttonStyle['backgroundColor'] = button.backgroundColor;
 
-                        return <section>
+                        return <section key={button.name}>
                             <button
                                 style={buttonStyle}
+                                key={button.name+'btn'}
                                 onClick={() => button.onClick ? button.onClick() : null}
                             >
                                 {button.name}
                             </button>
                             {
                                 !!spacing?
-                                <div style={{ width: `${spacing}%` }} className={"btn-hide"}></div>:
+                                <div key={button.name+'spacing'} style={{ width: `${spacing}%` }} className={"btn-hide"}></div>:
                                 ""
                             }
                         </section>

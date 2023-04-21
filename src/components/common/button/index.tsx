@@ -5,6 +5,6 @@ export default function ButtonGroup(prop: IButtonGroup) {
 
 
     return (
-        <ButtonGroupContainer key={`${{...prop}}`} {...prop}/>
+        <ButtonGroupContainer {...prop}/>
     );
 }

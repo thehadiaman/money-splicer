@@ -1,7 +1,7 @@
-export interface IFormFields{
+export interface IFormField{
     name: string;
     id: string;
-    value?: string;
+    value: string;
     type?: string;
     required?: boolean;
     placeholder?: string;
@@ -27,7 +27,8 @@ export interface IButton{
 export interface IForm{
     heading: string;
     subHeading?: string;
-    fields: Array<IFormFields>;
+    fields: Array<IFormField>;
     buttons: IButton;
     description?: string;
+    valueSetter?: Function;
 }

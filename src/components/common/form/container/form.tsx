@@ -1,10 +1,26 @@
 import ButtonGroup from "../../button";
-import { IForm, IFormFields } from "../interfaces";
+import { IForm, IFormField } from "../interfaces";
 
 /**
  * This common function dynamically generates form fields as per the input
  */
 export default function FormContainer(form: IForm) {
+
+    function handleValueChange(handleEvent: any): void{
+        const fieldName: string = handleEvent.target.name;
+        const fieldValue: string = handleEvent.target.value;
+        
+        let isValueChange: boolean = false;
+        form.fields.forEach((field: IFormField) => {
+            if(field['name'] === fieldName){
+                isValueChange = true;
+                field['value'] = fieldValue;
+            }
+        });
+        if(form.valueSetter && isValueChange)
+            form.valueSetter([...form.fields]);
+        console.log(form.fields)
+    }
 
     return (
         <div key={`form-${form.heading}`}>
@@ -18,7 +34,7 @@ export default function FormContainer(form: IForm) {
             }
             {
                 form.fields.map(
-                    (inputField: IFormFields) => {
+                    (inputField: IFormField) => {
                         return  <fieldset key={`form-${form.heading}-${inputField.name}`}>
                                     <input
                                         name={inputField.name}
@@ -27,6 +43,7 @@ export default function FormContainer(form: IForm) {
                                         type={inputField.type}
                                         required={!inputField.required?true:false}
                                         placeholder={inputField.placeholder}
+                                        onChange={handleValueChange}
                                     />
                                 </fieldset>
                     
