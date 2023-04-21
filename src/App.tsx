@@ -4,6 +4,7 @@ import WelcomePage from './components/welcome-page';
 import { auth } from './firebase/setup';
 import EmailNotVerified from './components/email-not-verified';
 import { User, onAuthStateChanged } from 'firebase/auth';
+import LoadingPage from './components/loading';
 
 function App() {
 
@@ -24,7 +25,7 @@ function App() {
 
 
   if(!isLoaded)
-    return <h1>Loading</h1>
+    return <LoadingPage/>
 
   if(!currentUser)
     return (
