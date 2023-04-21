@@ -1,8 +1,8 @@
 import WelcomePageContainer from "./container/welcome-page";
 
-function WelcomePage() {
+function WelcomePage(props: any) {
   return (
-    <WelcomePageContainer/>
+    <WelcomePageContainer {...props}/>
   );
 }
 

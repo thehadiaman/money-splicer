@@ -4,17 +4,17 @@ import ForgotPassword from "../../forgot-password";
 import LoginPage from "../../login";
 import SignUpPage from "../../signup";
 
-export default function WelcomePageContainer() {
+export default function WelcomePageContainer(props:any) {
 
     const tabsData: ITabs = ({
         tabs: [
                 {
                     name: 'Login',
-                    component: <LoginPage/>
+                    component: <LoginPage {...props}/>
                 },
                 {
                     name: 'Sign Up',
-                    component: <SignUpPage />
+                    component: <SignUpPage {...props}/>
                 },
                 {
                     name: 'Password',
