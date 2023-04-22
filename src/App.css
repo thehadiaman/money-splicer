@@ -169,6 +169,10 @@ fieldset {
   background-color: #3e8e41;
 }
 
+.btn-group .full-width{
+  width: 100%;
+}
+
 .btn-group-button-active {
   background-color: #3e8e41 !important;
 }
