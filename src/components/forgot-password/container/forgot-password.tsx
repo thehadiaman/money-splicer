@@ -29,13 +29,15 @@ export default function ForgotPasswordContainer() {
                 {
                     name: 'Clear',
                     backgroundColor: '#e63f3f',
-                    onClick: resetForm
+                    onClick: resetForm,
+                    type: 'reset'
                 },
                 {
                     name: 'Submit',
                     backgroundColor: '#6771df',
                     backgroundColorHover: '#000291',
-                    onClick: resetPassword
+                    onClick: resetPassword,
+                    type: 'submit'
                 }],
             spacing: 10
         },

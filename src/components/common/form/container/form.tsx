@@ -19,11 +19,16 @@ export default function FormContainer(form: IForm) {
         });
         if(form.valueSetter && isValueChange)
             form.valueSetter([...form.fields]);
-        console.log(form.fields)
+    }
+
+    const handleFormSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+        if(form.onSubmit)
+            form.onSubmit();
     }
 
     return (
-        <div key={`form-${form.heading}`}>
+        <form onSubmit={handleFormSubmit} key={`form-${form.heading}`}>
             {
                 form.heading&&
                 <h3 key={`form-${form.heading}-h3`}>{form.heading}</h3>
@@ -53,7 +58,7 @@ export default function FormContainer(form: IForm) {
             {
                 <ButtonGroup {...form.buttons} />
             }
-        </div>
+        </form>
     );
 
 };

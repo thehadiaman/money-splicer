@@ -14,11 +14,11 @@ export default function ButtonGroupContainer({buttons, spacing}: IButtonGroup) {
                             buttonStyle.color = button.color;
                         if(button['backgroundColor'])
                             buttonStyle['backgroundColor'] = button.backgroundColor;
-
                         return <section key={button.name}>
                             <button
                                 style={buttonStyle}
                                 key={button.name+'btn'}
+                                type={button.type}
                                 onClick={() => button.onClick ? button.onClick() : null}
                             >
                                 {button.name}

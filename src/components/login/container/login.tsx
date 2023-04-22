@@ -2,8 +2,9 @@ import { IForm, IFormField } from "../../common/form/interfaces";
 import Form from "../../common/form/container/form";
 import { getFormData } from "../../../common/functions/getFormData";
 import { useState } from "react";
+import { userLogin } from "../../../firebase/services/login/login.service";
 
-export default function LoginPageContainer() {
+export default function LoginPageContainer(props: any) {
 
     const inputFields: Array<IFormField> = [
         {
@@ -34,18 +35,20 @@ export default function LoginPageContainer() {
                 {
                     name: 'Clear',
                     backgroundColor: '#e63f3f',
-                    onClick: resetForm
+                    onClick: resetForm,
+                    type: 'reset'
                 },
                 {
                     name: 'Login',
                     backgroundColor: '#6771df',
                     backgroundColorHover: '#000291',
-                    onClick: login
+                    type: 'submit'
                 }
             ],
             spacing: 10
         },
-        valueSetter: setFormFields
+        valueSetter: setFormFields,
+        onSubmit: login
     };
 
     function login(): void{

@@ -46,13 +46,15 @@ export default function SignUpPageContainer(props:any) {
                 {
                     name: 'Clear',
                     backgroundColor: '#e63f3f',
-                    onClick: resetForm
+                    onClick: resetForm,
+                    type: 'reset'
                 },
                 {
                     name: 'Sign Up',
                     backgroundColor: '#6771df',
                     backgroundColorHover: '#000291',
-                    onClick: signUpUser
+                    onClick: signUpUser,
+                    type: 'submit'
                 }
             ],
             spacing: 10
@@ -68,7 +70,6 @@ export default function SignUpPageContainer(props:any) {
 
     function resetForm(): void{
         setFormFields(inputFields);
-        // signOutUser()
     }
 
     return (

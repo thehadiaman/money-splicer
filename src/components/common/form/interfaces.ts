@@ -17,6 +17,7 @@ export interface IFormButton{
     backgroundColor?: string;
     backgroundColorHover?: string;
     disabled?: boolean;
+    type: "button" | "submit" | "reset";
 }
 
 export interface IButton{
@@ -31,4 +32,5 @@ export interface IForm{
     buttons: IButton;
     description?: string;
     valueSetter?: Function;
+    onSubmit?: Function;
 }
