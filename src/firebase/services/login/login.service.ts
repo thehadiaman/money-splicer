@@ -1,31 +1,26 @@
 /**
  * Importing firebase auth and firebase app
  */
-import { User, getAuth, signOut } from "firebase/auth";
+import { signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { ILogin } from "./login.interfaces";
-import { fireApp } from "../../setup";
+import { auth } from "../../setup";
 
 export async function getLoggedInUser(){
-    const auth = await getAuth(fireApp);
     return auth.currentUser;
 }
 
-// export function login(loginData: ILogin){
-//     if(!auth.currentUser){
-           
-//     }
-//     else if(auth.currentUser && !auth.currentUser.emailVerified){
+export function userLogin(loginData: ILogin, setCurrentUser: Function){
+    const email = loginData['email'];
+    const password = loginData['password'];
+    if(email && password)
+        signInWithEmailAndPassword(auth, email, password)
+            .then(
+                cred=>{
+                    setCurrentUser(cred.user);
+                }
+            )
+}
 
-//     }
-//     else{
-
-//     }
-// }
-
-// export function signOutUser(){
-//     signOut(auth).then(() => {
-//         // Sign-out successful.
-//       }).catch((error) => {
-//         // An error happened.
-//       });
-// }
+export function signOutUser(){
+    signOut(auth);
+}

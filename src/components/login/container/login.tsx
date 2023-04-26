@@ -53,7 +53,7 @@ export default function LoginPageContainer(props: any) {
 
     function login(): void{
         let formData = getFormData(formFields);
-        console.log(formData);
+        userLogin(formData, props.setCurrentUser)
     }
 
     function resetForm(): void{
