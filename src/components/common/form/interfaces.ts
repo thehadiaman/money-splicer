@@ -7,6 +7,9 @@ export interface IFormField{
     placeholder?: string;
     disabled?: boolean;
     hidden?: boolean;
+    validation?: object;
+    touched?: boolean;
+    focused?: boolean;
 }
 
 export interface IFormButton{

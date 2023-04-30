@@ -18,7 +18,7 @@ export default function WelcomePageContainer(props:any) {
                 },
                 {
                     name: 'Password',
-                    component: <ForgotPassword />
+                    component: <ForgotPassword  {...props} />
                 }
             ]
         });

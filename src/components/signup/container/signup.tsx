@@ -76,7 +76,7 @@ export default function SignUpPageContainer(props:any) {
 
     function signUpUser(): void{
         let formData = getFormData(formFields);
-        signUpService(formData, props.setCurrentUser);
+        signUpService(formData, props.setCurrentUser, props.handleError);
         props.setCurrentUser()
     }
 

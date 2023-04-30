@@ -61,7 +61,7 @@ export default function LoginPageContainer(props: any) {
 
     function login(): void{
         let formData = getFormData(formFields);
-        userLogin(formData, props.setCurrentUser)
+        userLogin(formData, props.setCurrentUser, props.handleError)
     }
 
     function resetForm(): void{

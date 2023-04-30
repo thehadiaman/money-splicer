@@ -6,7 +6,7 @@ export default function EmailNotVerifiedContainer(props: any) {
 
 
     const sendEmailVerificationLink = () => {
-        sendVerificationMail(props.currentUser)
+        sendVerificationMail(props.currentUser, props.handleError)
     }
 
     const navMenu = [

@@ -6,12 +6,19 @@ import EmailNotVerified from './components/email-not-verified';
 import { User, onAuthStateChanged } from 'firebase/auth';
 import LoadingPage from './components/loading';
 import { getCurrentUserDetails } from './firebase/services/account/account.service';
+import SnackBar from './components/common/snackbar';
+import { IPopupModel, popupModel } from './common/constants/models';
 
 function App() {
 
   const [currentUser, setCurrentUser] = useState(auth.currentUser);
   const [currentUserDetails, setCurrentUserDetails] = useState(null);
   const [isLoaded, setLoaded] = useState(false);
+  const [popupMessage, setPopupMessage] = useState(popupModel);
+
+  function handleError(errorModel: IPopupModel){
+    setPopupMessage(errorModel);
+  }
   
 
   useEffect(()=>{
@@ -35,14 +42,24 @@ function App() {
 
   if(!currentUser)
     return (
-      <WelcomePage {...{setCurrentUser, currentUser}}/>
+      <div>
+        <SnackBar errorTitle={popupMessage.title} errorMessage={popupMessage.message} color={popupMessage.color}/>
+        <WelcomePage {...{setCurrentUser, currentUser, handleError}}/>
+      </div>
     );
   else if(!currentUser.emailVerified && currentUserDetails)
       return (
-        <EmailNotVerified {...{currentUser, currentUserDetails}}/>
+        <div>
+          <SnackBar errorTitle={popupMessage.title} errorMessage={popupMessage.message} color={popupMessage.color}/>
+          <EmailNotVerified {...{currentUser, currentUserDetails, handleError}}/>
+        </div>
       );
   else{
-    return <h1>{currentUser.email}</h1>
+    return(
+      <div>
+        <h1>{currentUser.email}</h1>
+      </div>
+    )
   }
 }
 
