@@ -13,25 +13,37 @@ export default function SignUpPageContainer(props:any) {
             name: 'email',
             id: 'email',
             type: 'email',
-            placeholder: 'Email',
+            placeholder: 'Email*',
             required: true,
-            value: ''
+            value: '',
+            validation:{
+               email: true,
+               required: true 
+            }
         },
         {
             name: 'name',
             id: 'name',
             type: 'text',
-            placeholder: 'Full Name',
+            placeholder: 'Full Name*',
             required: true,
-            value: ''
+            value: '',
+            validation:{
+               required: true,
+               min_length: 3
+            }
         },
         {
             name: 'password',
             id: 'password',
             type: 'password',
-            placeholder: 'Password',
+            placeholder: 'Password*',
             required: true,
-            value: ''
+            value: '',
+            validation:{
+               required: true,
+               min_length: 6
+            }
         }
     ];
 

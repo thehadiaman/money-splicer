@@ -1,3 +1,4 @@
+import { validateForm } from "../../../../common/functions/validateForm";
 import ButtonGroup from "../../button";
 import { IForm, IFormField } from "../interfaces";
 
@@ -14,7 +15,20 @@ export default function FormContainer(form: IForm) {
         form.fields.forEach((field: IFormField) => {
             if(field['name'] === fieldName){
                 isValueChange = true;
+                field['touched'] = true;
                 field['value'] = fieldValue;
+            }
+        });
+        if(form.valueSetter && isValueChange)
+            form.valueSetter([...form.fields]);
+    }
+    function handleBlue(handleEvent: any){
+        let isValueChange = false;
+        const fieldName: string = handleEvent.target.name;
+        form.fields.forEach((field: IFormField) => {
+            if(field['name'] === fieldName && !field['focused']){
+                field['focused'] = true;
+                isValueChange = true;
             }
         });
         if(form.valueSetter && isValueChange)
@@ -40,8 +54,20 @@ export default function FormContainer(form: IForm) {
             {
                 form.fields.map(
                     (inputField: IFormField) => {
+                        let errMessage = validateForm(inputField.name, inputField.validation, inputField.value);
                         return  <fieldset key={`form-${form.heading}-${inputField.name}`}>
+                                    { (errMessage && !!inputField.focused)?
+                                        <p className={'form-validation-error-text'}>
+                                            {errMessage}
+                                        </p>:
+                                        ""
+                                    }
                                     <input
+                                        className={
+                                            (errMessage && !!inputField.focused)?
+                                                'form-validation-error':
+                                                ''
+                                        }
                                         name={inputField.name}
                                         value={inputField.value}
                                         key={inputField.name}
@@ -49,6 +75,7 @@ export default function FormContainer(form: IForm) {
                                         required={!inputField.required?true:false}
                                         placeholder={inputField.placeholder}
                                         onChange={handleValueChange}
+                                        onBlur={handleBlue}
                                     />
                                 </fieldset>
                     

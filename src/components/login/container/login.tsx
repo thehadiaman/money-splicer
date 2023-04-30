@@ -11,17 +11,25 @@ export default function LoginPageContainer(props: any) {
             name: 'email',
             id: 'email',
             type: 'email',
-            placeholder: 'Email',
+            placeholder: 'Email*',
             required: true,
-            value: ''
+            value: '',
+            validation:{
+               email: true,
+               required: true 
+            }
         },
         {
             name: 'password',
             id: 'password',
             type: 'password',
-            placeholder: 'Password',
+            placeholder: 'Password*',
             required: true,
-            value: ''
+            value: '',
+            validation:{
+               required: true,
+               min_length: 6
+            }
         }
     ];
     const [formFields, setFormFields] = useState(inputFields)

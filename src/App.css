@@ -124,6 +124,13 @@ fieldset {
   color: #888;
 }
 
+.form-validation-error{
+  outline: 3px solid red;
+}
+.form-validation-error-text{
+  color: red;
+}
+
 /* Style the tab */
 .tab {
   overflow: hidden;

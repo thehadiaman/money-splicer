@@ -12,9 +12,13 @@ export default function ForgotPasswordContainer() {
             name: 'email',
             id: 'email',
             type: 'email',
-            placeholder: 'Email',
+            placeholder: 'Email*',
             required: true,
-            value: ''
+            value: '',
+            validation: {
+                required: true,
+                email: true
+            }
         }
     ];
 
