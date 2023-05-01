@@ -7,9 +7,11 @@ export interface IFormField{
     placeholder?: string;
     disabled?: boolean;
     hidden?: boolean;
-    validation?: object;
+    validation?: IValidate;
     touched?: boolean;
     focused?: boolean;
+    cols?: number;
+    rows?: number;
 }
 
 export interface IFormButton{
@@ -36,4 +38,12 @@ export interface IForm{
     description?: string;
     valueSetter?: Function;
     onSubmit?: Function;
+}
+
+export interface IValidate{
+    email?: boolean;
+    required?: boolean;
+    min_length?: number;
+    max_length?: number;
+    label?: string;
 }

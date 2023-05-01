@@ -311,6 +311,7 @@ fieldset {
   word-break: break-all;
   bottom: 30px; /* 30px from the bottom */
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.3), 0 15px 15px 0 rgba(0, 0, 0, 0.3); /* Shadow added */
+  z-index: 1000;
 }
 
 /* Show the snackbar when clicking on a button (class added with JavaScript) */
@@ -357,4 +358,177 @@ fieldset {
 @keyframes snack-fadeout {
   from {bottom: 30px; opacity: 1;}
   to {bottom: 0; opacity: 0;}
+}
+
+.row::after {
+  content: "";
+  clear: both;
+  display: block;
+}
+
+[class*="col-"] {
+  float: left;
+  padding: 15px;
+}
+
+html {
+  font-family: "Lucida Sans", sans-serif;
+}
+
+
+.rooms ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.rooms li {
+  padding: 8px;
+  margin-bottom: 7px;
+  background-color: #33b5e5;
+  color: #ffffff;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  cursor: pointer;
+}
+
+
+.rooms li:hover {
+  background-color: #0099cc;
+}
+
+.pending-payments {
+  color: #ffffff;
+  font-size: 14px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+
+.pending-payments div{
+  background-color: #33b5e5;
+  padding: 5px;
+  margin-bottom: 5px;
+  cursor: pointer;
+}
+
+.pending-payments :hover{
+  background-color: #0099cc;
+}
+
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: #0099cc;
+  color: white;
+  text-align: center;
+  padding: 15px;
+}
+
+/* For desktop: */
+.col-1 {width: 8.33%;}
+.col-2 {width: 16.66%;}
+.col-3 {width: 25%;}
+.col-4 {width: 33.33%;}
+.col-5 {width: 41.66%;}
+.col-6 {width: 50%;}
+.col-7 {width: 58.33%;}
+.col-8 {width: 66.66%;}
+.col-9 {width: 75%;}
+.col-10 {width: 83.33%;}
+.col-11 {width: 91.66%;}
+.col-12 {width: 100%;}
+
+@media only screen and (max-width: 768px) {
+  /* For mobile phones: */
+  [class*="col-"] {
+    width: 100%;
+  }
+}
+
+.hard-text{
+  font-weight: bolder;
+  font-size: x-large;
+}
+
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 50%;
+}
+
+/* The Close Button */
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.block-display{
+  display: block !important;
+}
+
+.none-display{
+  display: none;
+}
+
+.no-shadow{
+  box-shadow: none;
+}
+
+@media only screen and (max-width: 768px) {
+  /* For mobile phones: */
+ .modal-content{
+    width: 80%;
+  }
+}
+
+@media only screen and (max-width: 900px) {
+  /* For mobile phones: */
+ .modal-content{
+    width: 80%;
+  }
+}
+
+.model-btn{
+  width: 100%;
+  padding: 10px 15px;
+  background-color: #dc3545; 
+  border: none;
+  cursor: pointer;
+  color: white;
+}
+
+.model-btn :hover{
+  background-color: #af1f2d; 
+}
+
+.m-bot{
+  margin-bottom: 45px;
 }

@@ -8,6 +8,7 @@ import LoadingPage from './components/loading';
 import { getCurrentUserDetails } from './firebase/services/account/account.service';
 import SnackBar from './components/common/snackbar';
 import { IPopupModel, popupModel } from './common/constants/models';
+import LoggedInPage from './components/logged-in-page';
 
 function App() {
 
@@ -18,6 +19,12 @@ function App() {
 
   function handleError(errorModel: IPopupModel){
     setPopupMessage(errorModel);
+    setTimeout(() => {
+      popupModel['title'] = '';
+      popupModel['message'] = '';
+      popupModel['color'] = 'info';
+      setPopupMessage(JSON.parse(JSON.stringify(popupModel)));
+    }, 4000);
   }
   
 
@@ -57,7 +64,8 @@ function App() {
   else{
     return(
       <div>
-        <h1>{currentUser.email}</h1>
+        <LoggedInPage {...{currentUser, currentUserDetails, handleError}} />
+        <SnackBar errorTitle={popupMessage.title} errorMessage={popupMessage.message} color={popupMessage.color}/>
       </div>
     )
   }

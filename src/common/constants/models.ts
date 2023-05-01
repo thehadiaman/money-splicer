@@ -9,3 +9,15 @@ export const popupModel: IPopupModel = {
     message: '',
     color: 'info'
 };
+
+export interface ICurrentRoom{
+    name: string;
+    description: string;
+    roomId: string;
+}
+
+export const currentRoomModel: ICurrentRoom = {
+    name: '',
+    description: '',
+    roomId: ''
+};

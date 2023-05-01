@@ -1,6 +1,6 @@
 import { sendVerificationMail } from "../../../firebase/services/email/verification.service";
 import { signOutUser } from "../../../firebase/services/login/login.service";
-import TopNavigation from "../../top-navigation";
+import TopNavigation from "../../common/top-navigation";
 
 export default function EmailNotVerifiedContainer(props: any) {
 

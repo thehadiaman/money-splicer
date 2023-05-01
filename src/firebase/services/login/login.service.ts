@@ -18,6 +18,14 @@ export function userLogin(loginData: ILogin, setCurrentUser: Function, handleErr
             .then(
                 cred=>{
                     setCurrentUser(cred.user);
+                    popupModel['title'] = 'Login Successful';
+                    popupModel['color'] = 'success';
+                    if(cred.user.emailVerified)
+                        popupModel['message'] = 'User logged in';
+                    else
+                        popupModel['message'] = 'Please verify the email';
+
+                    handleError(JSON.parse(JSON.stringify(popupModel)));
                 }
             )
             .catch(

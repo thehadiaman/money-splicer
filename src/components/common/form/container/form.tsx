@@ -55,6 +55,33 @@ export default function FormContainer(form: IForm) {
                 form.fields.map(
                     (inputField: IFormField) => {
                         let errMessage = validateForm(inputField.name, inputField.validation, inputField.value);
+                        if(inputField.type === "textarea"){
+                            return (
+                                <fieldset key={`form-${form.heading}-${inputField.name}`}>
+                                    { (errMessage && !!inputField.focused)?
+                                        <p className={'form-validation-error-text'}>
+                                            {errMessage}
+                                        </p>:
+                                        ""
+                                    }
+                                    <textarea
+                                        name={inputField.name}
+                                        id={inputField.id}
+                                        cols={inputField.cols}
+                                        rows={inputField.rows}
+                                        key={inputField.name}
+                                        placeholder={inputField.placeholder}
+                                        onChange={handleValueChange}
+                                        onBlur={handleBlue}
+                                        className={
+                                            (errMessage && !!inputField.focused)?
+                                                'form-validation-error':
+                                                ''
+                                        }
+                                    ></textarea>
+                                </fieldset>
+                            );
+                        }
                         return  <fieldset key={`form-${form.heading}-${inputField.name}`}>
                                     { (errMessage && !!inputField.focused)?
                                         <p className={'form-validation-error-text'}>
