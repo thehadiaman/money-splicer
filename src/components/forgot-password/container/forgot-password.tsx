@@ -3,18 +3,22 @@ import { IForm, IFormField } from "../../common/form/interfaces";
 import Form from "../../common/form/container/form";
 import { getFormData } from "../../../common/functions/getFormData";
 import { useState } from "react";
-import { signUpService } from "../../../firebase/services/signup/signup.service";
+import { sendPasswordResetEmailLink } from "../../../firebase/services/password-reset/password-reset.service";
 
-export default function ForgotPasswordContainer() {
+export default function ForgotPasswordContainer(props: any) {
 
     const inputFields: Array<IFormField> = [
         {
             name: 'email',
             id: 'email',
             type: 'email',
-            placeholder: 'Email',
+            placeholder: 'Email*',
             required: true,
-            value: ''
+            value: '',
+            validation: {
+                required: true,
+                email: true
+            }
         }
     ];
 
@@ -29,13 +33,15 @@ export default function ForgotPasswordContainer() {
                 {
                     name: 'Clear',
                     backgroundColor: '#e63f3f',
-                    onClick: resetForm
+                    onClick: resetForm,
+                    type: 'reset'
                 },
                 {
                     name: 'Submit',
                     backgroundColor: '#6771df',
                     backgroundColorHover: '#000291',
-                    onClick: resetPassword
+                    onClick: resetPassword,
+                    type: 'submit'
                 }],
             spacing: 10
         },
@@ -44,7 +50,7 @@ export default function ForgotPasswordContainer() {
 
     function resetPassword(): void {
         let formData = getFormData(formFields);
-        console.log(formData);
+        sendPasswordResetEmailLink(formData['email'], props.handleError)
     }
 
     function resetForm(): void {

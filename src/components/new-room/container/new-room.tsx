@@ -1,56 +1,44 @@
-
 import { IForm, IFormField } from "../../common/form/interfaces";
 import Form from "../../common/form/container/form";
 import { getFormData } from "../../../common/functions/getFormData";
 import { useState } from "react";
-import { signUpService } from "../../../firebase/services/signup/signup.service";
+import { createRoomService } from "../../../firebase/services/room/room.service";
 
-export default function SignUpPageContainer(props:any) {
+
+export default function NewRoomContainer(props: any) {
 
     const inputFields: Array<IFormField> = [
         {
-            name: 'email',
-            id: 'email',
-            type: 'email',
-            placeholder: 'Email*',
-            required: true,
-            value: '',
-            validation:{
-               email: true,
-               required: true 
-            }
-        },
-        {
-            name: 'name',
-            id: 'name',
+            name: 'roomName',
+            id: 'roomName',
             type: 'text',
-            placeholder: 'Full Name*',
+            placeholder: 'Room Name*',
             required: true,
             value: '',
             validation:{
                required: true,
-               min_length: 3
+               min_length: 3,
+               max_length: 50,
+               label: 'Room name'
             }
         },
         {
-            name: 'password',
-            id: 'password',
-            type: 'password',
-            placeholder: 'Password*',
+            name: 'roomDescription',
+            id: 'roomDescription', 
+            type: 'textarea',
+            placeholder: 'Room description',
             required: true,
             value: '',
             validation:{
-               required: true,
-               min_length: 6
+               max_length: 100,
+               label: 'Room description'
             }
         }
     ];
-
     const [formFields, setFormFields] = useState(inputFields)
 
-    const signUpForm: IForm = {
-        heading: 'Sign Up',
-        subHeading: `Sign Up if you don't have an account`,
+    const roomForm: IForm = {
+        heading: 'Create room',
         fields: formFields,
         buttons: {
             buttons: [
@@ -61,22 +49,21 @@ export default function SignUpPageContainer(props:any) {
                     type: 'reset'
                 },
                 {
-                    name: 'Sign Up',
+                    name: 'Create',
                     backgroundColor: '#6771df',
                     backgroundColorHover: '#000291',
-                    onClick: signUpUser,
                     type: 'submit'
                 }
             ],
             spacing: 10
         },
-        valueSetter: setFormFields
+        valueSetter: setFormFields,
+        onSubmit: createRoom
     };
 
-    function signUpUser(): void{
+    function createRoom(): void{
         let formData = getFormData(formFields);
-        signUpService(formData, props.setCurrentUser, props.handleError);
-        props.setCurrentUser()
+        createRoomService(formData, props.currentUser.uid, props.handleError, props.handleModal);
     }
 
     function resetForm(): void{
@@ -84,6 +71,6 @@ export default function SignUpPageContainer(props:any) {
     }
 
     return (
-        <Form {...signUpForm} />
+        <Form {...roomForm} />
     );
 }

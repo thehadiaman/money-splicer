@@ -6,6 +6,7 @@ export interface IButton{
     backgroundColor?: string;
     backgroundColorHover?: string;
     disabled?: boolean;
+    type: "button" | "submit" | "reset";
 }
 
 export interface IButtonGroup{

@@ -4,38 +4,71 @@ import WelcomePage from './components/welcome-page';
 import { auth } from './firebase/setup';
 import EmailNotVerified from './components/email-not-verified';
 import { User, onAuthStateChanged } from 'firebase/auth';
+import LoadingPage from './components/loading';
+import { getCurrentUserDetails } from './firebase/services/account/account.service';
+import SnackBar from './components/common/snackbar';
+import { IPopupModel, popupModel } from './common/constants/models';
+import LoggedInPage from './components/logged-in-page';
+import { clone } from './common/functions/cloneData';
 
 function App() {
 
   const [currentUser, setCurrentUser] = useState(auth.currentUser);
+  const [currentUserDetails, setCurrentUserDetails] = useState(null);
   const [isLoaded, setLoaded] = useState(false);
+  const [popupMessage, setPopupMessage] = useState(popupModel);
+
+  function handleError(errorModel: IPopupModel){
+    setPopupMessage(errorModel);
+    setTimeout(() => {
+      popupModel['title'] = '';
+      popupModel['message'] = '';
+      popupModel['color'] = 'info';
+      setPopupMessage(clone(popupModel));
+    }, 4000);
+  }
   
 
   useEffect(()=>{
-    onAuthStateChanged(auth, function(user: SetStateAction<User | null>) {
+    onAuthStateChanged(auth, async function(user: SetStateAction<User | null>) {
       if (user) {
-        setCurrentUser(user);
+        
+        await setCurrentUser(user);
+        getCurrentUserDetails(user, setCurrentUserDetails)
+          
       }else{
         setCurrentUser(null);
       }
       setLoaded(true);
     });
+
   }, []);
 
 
-  if(!isLoaded)
-    return <h1>Loading</h1>
+  if(!isLoaded || (currentUser && !currentUserDetails))
+    return <LoadingPage/>
 
   if(!currentUser)
     return (
-      <WelcomePage {...{setCurrentUser, currentUser}}/>
+      <div>
+        <SnackBar errorTitle={popupMessage.title} errorMessage={popupMessage.message} color={popupMessage.color}/>
+        <WelcomePage {...{setCurrentUser, currentUser, handleError}}/>
+      </div>
     );
-  else if(!currentUser.emailVerified)
+  else if(!currentUser.emailVerified && currentUserDetails)
       return (
-        <EmailNotVerified {...{currentUser}}/>
+        <div>
+          <SnackBar errorTitle={popupMessage.title} errorMessage={popupMessage.message} color={popupMessage.color}/>
+          <EmailNotVerified {...{currentUser, currentUserDetails, handleError}}/>
+        </div>
       );
   else{
-    return <h1>{currentUser.email}</h1>
+    return(
+      <div>
+        <LoggedInPage {...{currentUser, currentUserDetails, handleError}} />
+        <SnackBar errorTitle={popupMessage.title} errorMessage={popupMessage.message} color={popupMessage.color}/>
+      </div>
+    )
   }
 }
 
