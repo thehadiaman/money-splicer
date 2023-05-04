@@ -1,4 +1,4 @@
-import { onValue, ref, set, update } from "firebase/database";
+import { onValue, ref, set } from "firebase/database";
 import { PAYMENT_COLLECTION, USER_COLLECTION } from "../../../common/constants/collections";
 import { database } from "../../setup";
 import { generateRandomNumber } from "../../../common/functions/generateRandomNumber";

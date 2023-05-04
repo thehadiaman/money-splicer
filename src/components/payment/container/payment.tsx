@@ -101,6 +101,7 @@ export default function PaymentContainer(props: any) {
             arrRoomMateAmounts.push(newField);
         });
 
+        // eslint-disable-next-line react-hooks/exhaustive-deps
         inputFields = [inputFields[0], ...arrRoomMateAmounts, inputFields[1]];
         setFormFields(inputFields);
 
