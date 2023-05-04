@@ -14,7 +14,7 @@ export function validateForm(name:string="", formValidation:IValidate|undefined,
     }
 
     if(formValidation['email']){
-        const emailRegexp = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+        const emailRegexp = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
         if (!emailRegexp.test(value)){
             errorMessage = "Invalid email format";
             return errorMessage;
