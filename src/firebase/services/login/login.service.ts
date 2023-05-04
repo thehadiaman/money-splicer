@@ -5,6 +5,7 @@ import { signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { ILogin } from "./login.interfaces";
 import { auth } from "../../setup";
 import { popupModel } from "../../../common/constants/models";
+import { clone } from "../../../common/functions/cloneData";
 
 export async function getLoggedInUser(){
     return auth.currentUser;
@@ -25,7 +26,7 @@ export function userLogin(loginData: ILogin, setCurrentUser: Function, handleErr
                     else
                         popupModel['message'] = 'Please verify the email';
 
-                    handleError(JSON.parse(JSON.stringify(popupModel)));
+                    handleError(clone(popupModel));
                 }
             )
             .catch(
@@ -34,26 +35,26 @@ export function userLogin(loginData: ILogin, setCurrentUser: Function, handleErr
                         popupModel['title'] = 'Login Failed';
                         popupModel['message'] = 'Invalid email address';
                         popupModel['color'] = 'error';
-                        handleError(JSON.parse(JSON.stringify(popupModel)));
+                        handleError(clone(popupModel));
                     }
                     if(error.code === 'auth/wrong-password'){
                         popupModel['title'] = 'Login Failed';
                         popupModel['message'] = 'Invalid Password';
                         popupModel['color'] = 'error';
-                        handleError(JSON.parse(JSON.stringify(popupModel)));
+                        handleError(clone(popupModel));
                     }
                     if(error.code === 'auth/too-many-requests'){
                         popupModel['title'] = 'Too many requests';
                         popupModel['message'] = 'Please try login after some times';
                         popupModel['color'] = 'error';
-                        handleError(JSON.parse(JSON.stringify(popupModel)));
+                        handleError(clone(popupModel));
                     }
                 }
             )
     else{
         popupModel['message'] = 'Email and Password required';
         popupModel['color'] = 'error';
-        handleError(JSON.parse(JSON.stringify(popupModel)));
+        handleError(clone(popupModel));
     }
 }
 

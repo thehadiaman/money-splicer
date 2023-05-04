@@ -1,8 +1,8 @@
-import RoomContainer from "./container/room";
+import RoomPageContainer from "./container/room";
 
-export default function Room(props: any) {
+export default function RoomPage(props: any) {
 
     return (
-        <RoomContainer {...props}/>
+        <RoomPageContainer {...props}/>
     );
 }

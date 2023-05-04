@@ -68,13 +68,15 @@ export default function FormContainer(form: IForm) {
                                         name={inputField.name}
                                         id={inputField.id}
                                         cols={inputField.cols}
+                                        value={inputField.value}
                                         rows={inputField.rows}
                                         key={inputField.name}
                                         placeholder={inputField.placeholder}
                                         onChange={handleValueChange}
                                         onBlur={handleBlue}
                                         className={
-                                            (errMessage && !!inputField.focused)?
+                                            ((errMessage && !!inputField.focused)
+                                            || inputField.error)?
                                                 'form-validation-error':
                                                 ''
                                         }
@@ -89,6 +91,11 @@ export default function FormContainer(form: IForm) {
                                         </p>:
                                         ""
                                     }
+                                    {
+                                        inputField.label?
+                                        <label htmlFor={inputField.name}>{inputField.label}</label>:
+                                        ""
+                                    }
                                     <input
                                         className={
                                             (errMessage && !!inputField.focused)?
@@ -98,10 +105,16 @@ export default function FormContainer(form: IForm) {
                                         name={inputField.name}
                                         value={inputField.value}
                                         key={inputField.name}
+                                        disabled={!!inputField.disabled}
                                         type={inputField.type}
                                         required={!inputField.required?true:false}
                                         placeholder={inputField.placeholder}
-                                        onChange={handleValueChange}
+                                        onChange={
+                                            (event)=> 
+                                                inputField.onValueChange?
+                                                inputField.onValueChange(event, handleValueChange, form.fields):
+                                                handleValueChange(event)
+                                        }
                                         onBlur={handleBlue}
                                     />
                                 </fieldset>

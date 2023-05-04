@@ -30,6 +30,7 @@ body {
 }
 
 .common-form input[type="text"],
+.common-form input[type="number"],
 .common-form input[type="password"],
 .common-form input[type="email"],
 .common-form input[type="tel"],
@@ -68,6 +69,7 @@ fieldset {
 }
 
 .common-form input[type="text"],
+.common-form input[type="number"],
 .common-form input[type="password"],
 .common-form input[type="email"],
 .common-form input[type="tel"],
@@ -81,6 +83,7 @@ fieldset {
 }
 
 .common-form input[type="text"]:hover,
+.common-form input[type="number"]:hover,
 .common-form input[type="password"]:hover,
 .common-form input[type="email"]:hover,
 .common-form input[type="tel"]:hover,
@@ -531,4 +534,119 @@ html {
 
 .m-bot{
   margin-bottom: 45px;
+}
+
+.m-bot-10{
+  margin-bottom: 10px;
+}
+
+.edit-button{
+  float: right;
+  padding: 3px;
+  border-radius: 5px;
+  font-size: large;
+  border: none;
+  top: 0px;
+  color: black;
+  background-color: yellow;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+/* The container */
+.check-box .container {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 22px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default checkbox */
+.check-box .container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Create a custom checkbox */
+.check-box .checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: #eee;
+}
+
+/* On mouse-over, add a grey background color */
+.check-box .container:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+/* When the checkbox is checked, add a blue background */
+.check-box .container input:checked ~ .checkmark {
+  background-color: #21f32c;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+.check-box  .container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+.check-box  .container .checkmark:after {
+  left: 9px;
+  top: 5px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+.not-mine-check-box {
+  background-color: #ffc107 !important;
+}
+
+/* Float right */
+.fr{
+  float: right;
+}
+
+.add-room-mate{
+  float: right;
+  font-size: large;
+  font-weight: bolder;
+  padding: 5px 10px;
+  background-color: yellow;
+  border: none;
+  cursor: pointer;
+}
+
+.exit-room-mate{
+  float: right;
+  font-size: large;
+  font-weight: bolder;
+  padding: 5px 10px;
+  color: white;
+  background-color: red;
+  border: none;
+  cursor: pointer;
 }

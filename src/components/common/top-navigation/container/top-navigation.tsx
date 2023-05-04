@@ -1,4 +1,8 @@
+import { useNavigate } from "react-router-dom";
+
 export default function TopNavigationContainer(props: any) {
+
+    const navigate = useNavigate();
 
     return (
         <section className={"topnav"}>
@@ -12,7 +16,8 @@ export default function TopNavigationContainer(props: any) {
                             return <a
                                 key={navItem['displayName']}
                                 className={navItem['status']}
-                                href={navItem['link']}>
+                                href={`#${navItem['displayName']}`}
+                                onClick={()=>navigate(navItem['link'])}>
                                 {navItem['displayName']}
                             </a>
                         /**

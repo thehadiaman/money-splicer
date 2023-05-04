@@ -1,36 +1,23 @@
 import { useEffect, useState } from "react";
 import { generateRandomNumber } from "../../../common/functions/generateRandomNumber";
 import { getRoomService } from "../../../firebase/services/room/room.service";
-import Modal from "../../common/modal";
-import { currentRoomModel } from "../../../common/constants/models";
+import { useNavigate } from "react-router-dom";
 
 export default function RoomsListContainer(props: any) {
 
     const [rooms, setRooms] = useState([])
-    const [showModal, setShowModal] = useState(false)
-    const [currentRoom, setCurrentRoom] = useState(currentRoomModel)
+    const navigate = useNavigate();
 
     useEffect(() => {
-        getRoomService(props.currentUser.uid, setRooms);
+        getRoomService({uid: props.currentUser.uid, setRooms});
     }, [props.currentUser.uid]);
 
     function openRoom(room: any){
-        handleModal()
-        setCurrentRoom(room)
-    }
-
-    function handleModal(){
-        setShowModal(!showModal);
+        navigate(`/room/${room.roomId}`)
     }
 
     return (
         <div className={"col-8 rooms"}>
-            {
-                showModal?
-                    <Modal {...{handleModal, component: <div>Room{currentRoom.name}</div>}}/>
-                :
-                ""
-            }
             <h2>Rooms</h2>
             <ul>
                 {
@@ -50,7 +37,7 @@ export default function RoomsListContainer(props: any) {
                         <li>No rooms...</li>
                         : ""
                 }
-                <li onClick={props.handleModal} id={"add-new-room"} className="center-text hard-text">+</li>
+                <li onClick={()=>props.handleModal()} id={"add-new-room"} className="center-text hard-text">+</li>
             </ul>
         </div>
     );

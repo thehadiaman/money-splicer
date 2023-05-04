@@ -9,6 +9,7 @@ import { getCurrentUserDetails } from './firebase/services/account/account.servi
 import SnackBar from './components/common/snackbar';
 import { IPopupModel, popupModel } from './common/constants/models';
 import LoggedInPage from './components/logged-in-page';
+import { clone } from './common/functions/cloneData';
 
 function App() {
 
@@ -23,7 +24,7 @@ function App() {
       popupModel['title'] = '';
       popupModel['message'] = '';
       popupModel['color'] = 'info';
-      setPopupMessage(JSON.parse(JSON.stringify(popupModel)));
+      setPopupMessage(clone(popupModel));
     }, 4000);
   }
   
